@@ -7,8 +7,8 @@ y_data = tmp_data$weight;
 
 # calculate values
 data_num = lengths(tmp_data[1]);
-mean_height = sum(tmp_data$height) / data_num;
-mean_weight = sum(tmp_data$weight) / data_num;
+mean_height = mean(tmp_data$height)
+mean_weight = mean(tmp_data$weight)
 cat("mean_x : ",mean_height,'\n')
 cat("mean_y : ",mean_weight,'\n')
 
@@ -28,7 +28,7 @@ for (i in 1:data_num) {
     q4 = q4 + x_data[i] * y_data[i];
 }
 
-b1_down = 0;
+b1_down = 0;x
 for (i in 1:data_num) {
     b1_down = b1_down + (tmp_data$height[i] - mean_height) ^ 2;
 }
