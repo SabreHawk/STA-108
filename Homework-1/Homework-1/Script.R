@@ -16,7 +16,7 @@ cat("mean_y : ",mean_weight,'\n')
 plot(x = x_data ,y = y_data, xlab = "Height", ylab = "Weight");
 reg = lm(y_data ~ x_data);
 abline(reg);
-points(mean_height, mean_weight, col = "blue");
+points(mean_height, mean_weight,cex=2,col="blue");
 b1_up = 0;
 q2 = 0;
 q3 = 0;
