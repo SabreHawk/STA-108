@@ -28,7 +28,7 @@ SE_b1 = sqrt(MSE / SE_b1_down);
 SE_b0 = sqrt(MSE * (1 / data_num + mean_diploma ^ 2 / SE_b0_rd));
 
 #2.e
-critical_value_0.025_83 = 1.989;
+critical_value_0.025_83 = 1. 989;
 abs_T = mean_diploma / sqrt(MSE / data_num)
 print(abs_T)
 critical_value_82_0.975 = 1.989
