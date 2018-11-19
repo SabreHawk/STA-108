@@ -5,12 +5,15 @@ __date__ = '2018/11/5 15:24'
 
 import MultipleLinearRegression as mlr
 import numpy as np
-
+import math
 if __name__ == '__main__':
     tmp_mode = mlr.MultipleLinearRegression()
     tmp_mode.load_data(file_name='property.txt')
     tmp_mode.init_model()
-    np.set_printoptions(precision=4, suppress=True)
+    np.set_printoptions(precision=10, suppress=True)
+
+    print(tmp_mode.beta_hat_mat[2]/math.sqrt(tmp_mode.sigma_square_hat*(tmp_mode.design_mat.T*tmp_mode.design_mat).I[2,2]));
+    print(tmp_mode.beta_hat_mat)
     print('The dimension of the design matrix X =', tmp_mode.design_mat.shape)
     print('The dimension of the response matrix Y =', tmp_mode.y_mat.shape)
     print("X^t * X =\n", tmp_mode.design_mat.T * tmp_mode.design_mat)
