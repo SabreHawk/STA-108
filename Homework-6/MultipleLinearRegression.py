@@ -47,19 +47,20 @@ class MultipleLinearRegression(object):
 
     def hypothesis_test_zero(self, *, index_list, alpha):
         sse_full = float(self.__error_mat.T * self.__error_mat)
-        # print("SSE_Full = ",sse_full)
+        print("SSE_Full = ", sse_full)
         tmp_design_mat = np.delete(self.__design_mat, index_list, axis=1)
         tmp_beta_mat = (tmp_design_mat.T * tmp_design_mat).I * tmp_design_mat.T * self.__y_mat
         tmp_yr_hat_mat = tmp_design_mat * tmp_beta_mat
         tmp_error_mat = self.__y_mat - tmp_yr_hat_mat
         sse_residual = tmp_error_mat.T * tmp_error_mat
-        # print("SSE_Residual = ",sse_residual)
+        print("SSE_Residual = ", sse_residual)
         df_sse_f = self.__sample_num - self.__predictor_num
         # print("DF_full = ",df_sse_f)
         df_sse_r = df_sse_f + len(index_list)
-        # print("DF_residual = ",df_sse_r)
+        print("DF_residual = ", df_sse_r)
         tmp_value = float(((sse_residual - sse_full) / (df_sse_r - df_sse_f)) / (sse_full / df_sse_f))
         f_value = f.isf(alpha, df_sse_r - df_sse_f, df_sse_f)
+
         ht = tmp_value < f_value
         return [ht, tmp_value, f_value]
 
@@ -67,7 +68,7 @@ class MultipleLinearRegression(object):
         tmp_x_mat = np.mat(x_list).T
         pre_num = tmp_x_mat.shape[1]
         tmp_y_hat = tmp_x_mat.T * self.__beta_hat_mat
-        print('Y_Hat = ',tmp_y_hat)
+        print('Y_Hat = ', tmp_y_hat)
         t_value = t.isf(alpha / (2 * pre_num), self.__sample_num - self.__predictor_num)
         tmp_sd = np.sqrt(self.variance_y_hat(x_list=x_list))
         return [np.diag(tmp_y_hat - t_value * tmp_sd), np.diag(tmp_y_hat + t_value * tmp_sd)]
@@ -79,7 +80,7 @@ class MultipleLinearRegression(object):
         t_value = t.isf(alpha / (2 * pre_num), self.__sample_num - self.__predictor_num)
         tmp_sd = np.sqrt(self.__sigma_square_hat * (
                 1 + tmp_x_mat.T * (self.__design_mat.T * self.__design_mat).I * tmp_x_mat))
-        return np.mat([np.diag(tmp_y_hat - t_value * tmp_sd),np.diag(tmp_y_hat + t_value * tmp_sd)]).T
+        return np.mat([np.diag(tmp_y_hat - t_value * tmp_sd), np.diag(tmp_y_hat + t_value * tmp_sd)]).T
 
     @property
     def sample_num(self):
