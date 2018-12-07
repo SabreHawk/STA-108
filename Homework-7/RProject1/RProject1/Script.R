@@ -48,4 +48,16 @@ press23 = sum((model23$residuals / (1 - lm.influence(model23)$hat)) ^ 2)
 model123 = lm(mydata$Y ~ mydata$X1 + mydata$X2 + mydata$X3)
 press123 = sum((model123$residuals / (1 - lm.influence(model123)$hat)) ^ 2)
 
+## stepwise regression
+
+mydata = read.table("sel.txt", header = T)
+n = dim(mydata)[1]
+
+model0 = lm(Y ~ 1, data = mydata) #the model with no predictor variable
+modelF = lm(Y ~ ., data = mydata)
+
+# using AIC
+step(model0, scope = list(lower = model0, upper = modelF), direction = "both")
+
+step(model0, scope = list(lower = model0, upper = modelF), direction = "forward")
 
